@@ -19,6 +19,7 @@ class MathGame {
         let app = this.app;
         app.renderer.view.style.position = "absolute";
         app.renderer.view.style.display = "block";
+        app.renderer.backgroundColor = 0xfcda93;
         // app.renderer.autoResize = true;
         app.renderer.resize(window.innerWidth, window.innerHeight);
         this.state.currRoute = 'start';
