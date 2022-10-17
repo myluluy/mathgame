@@ -1,7 +1,7 @@
 import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture} from 'pixi.js';
 import gamebutton from '../../assets/gamebutton.png';
 class Button {
-    onClick:Function = ()=>{
+    onClick:Function = (e:any)=>{
         console.log('click:', this.text);
     };
     text:string = 'Button'; 
@@ -32,15 +32,20 @@ class Button {
         loader.add('btn',gamebutton)
         const texture = Texture.from(gamebutton);
         const button = new Sprite(texture);
+        button.buttonMode = true;
+        button.interactive = true;
         button.addChild(text);
+        button.on('pointerdown',(e)=>{
+                this.onClick.call(this,[e]);
+            });
         this._button.addChild(button);
         loader.load((loader,resources) =>{
             let rectangle = new Rectangle(231,439, 2520,1199);
             texture.frame = rectangle;
-            console.log(text.width,this._button.width,button.width)
             text.x = (this._button.width - text.width) /2;
             text.y = (this._button.height - text.height)/2 * 0.9;
             this._button.scale = {x:0.08,y:0.08}
+            
         })
         
     }
