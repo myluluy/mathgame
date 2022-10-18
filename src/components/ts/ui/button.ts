@@ -1,43 +1,43 @@
+import type { ListenerFn } from 'eventemitter3';
 import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture} from 'pixi.js';
 import gamebutton from '../../assets/gamebutton.png';
+
+/**load assets */
+
+const loader = Loader.shared;
+loader.add('btn',gamebutton)
+
 class Button {
-    onClick:Function = (e:any)=>{
-        console.log('click:', this.text);
-    };
+    
     text:string = 'Button'; 
     private _button:Container;
     constructor(options:any) {
         if(typeof options.text === 'string') {
             this.text = options.text;
         }
-        if(typeof options.onClick === 'function') {
-            this.onClick = options.onClick;
-        }
+        
         this._button = new Container();
+        this._button.buttonMode = true;
+        this._button.interactive = true;
         this._build(options.size||0.08);
     }
-
+    on:Function = (event:string,fn: ListenerFn)=>{
+        this._button.on(event, fn)
+    };
     appendTo(container:Container) {
         container.addChild(this._button);
         
     }
 
-    _build(size:number){
-        const loader = Loader.shared;
+    private _build(size:number){
         const text = new Text(this.text,{
             fontSize:420,
             fill:0xffffff,
             align:"center"
         });
-        loader.add('btn',gamebutton)
         const texture = Texture.from(gamebutton);
         const button = new Sprite(texture);
-        button.buttonMode = true;
-        button.interactive = true;
         button.addChild(text);
-        button.on('pointerdown',(e)=>{
-                this.onClick.call(this,[e]);
-            });
         this._button.addChild(button);
         loader.load((loader,resources) =>{
             let rectangle = new Rectangle(231,439, 2520,1199);

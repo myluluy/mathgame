@@ -1,13 +1,14 @@
 import type {SCOPE} from '../../../../mathgame';
 import Button from  '../ui/button';
-import {Container,Sprite,Graphics, Application} from 'pixi.js';
-import router from '@/router';
-
+import {Container, Application} from 'pixi.js';
+import type Router from '../router';
 class StartScope {
     app:Application;
     scope:SCOPE;
-    constructor(app:Application){
+    router:Router;
+    constructor(app:Application,router:Router){
         this.app = app;
+        this.router = router
         this.scope = {
             name:'start',
             scope: {},
@@ -24,13 +25,12 @@ class StartScope {
      init(){
         let button = new Button({
             text:'开始游戏',
-            
-            onClick: ((e:any) =>{
-                console.log('aaa')
-            })
+        })
+        button.on('pointerup',(e: any)=>{
+            this.router.routerTo('game');
         })
         let buttonContainer = new Container();
-
+        
         button.appendTo(buttonContainer);
         this.scope.container.addChild(buttonContainer);
         this.scope.state.isInit = true;

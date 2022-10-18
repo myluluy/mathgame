@@ -1,11 +1,8 @@
 
-import type {SCOPES,SCOPE} from '../../../mathgame';
-import {Application,utils,Container} from 'pixi.js';
+import {Application,utils} from 'pixi.js';
 import Router from '../ts/router';
 class MathGame {
-    PIXI: any;
     app:Application = new Application() ;
-    SCOPES:SCOPES = {};
     state:any = {};
     router:Router;
     constructor (){
@@ -36,6 +33,9 @@ class MathGame {
     running(){
         if(!this.router.currRoute) {
             return;
+        }
+        if('function' === typeof this.router.routeAction) {
+            this.router.routeAction();
         }
         this.router.currRoute.gameLoop();
     }
