@@ -14,7 +14,7 @@ class Button {
             this.onClick = options.onClick;
         }
         this._button = new Container();
-        this._build(options.style || {});
+        this._build(options.size||0.08);
     }
 
     appendTo(container:Container) {
@@ -22,7 +22,7 @@ class Button {
         
     }
 
-    _build(style:any){
+    _build(size:number){
         const loader = Loader.shared;
         const text = new Text(this.text,{
             fontSize:420,
@@ -44,7 +44,7 @@ class Button {
             texture.frame = rectangle;
             text.x = (this._button.width - text.width) /2;
             text.y = (this._button.height - text.height)/2 * 0.9;
-            this._button.scale = {x:0.08,y:0.08}
+            this._button.scale = {x:size,y:size}
             
         })
         
