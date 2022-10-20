@@ -23,12 +23,21 @@ class StartScope extends BaseScope{
         let startButton = new Button({
             text:'开始游戏',
         });
+        let recordButton = new Button({
+            text:'成绩记录',
+        });
         this.addLoad(startButton); //预加载资源
+        this.addLoad(recordButton); //预加载资源
         startButton.on('pointerup',(e: any)=>{
             this.router.routerTo('game');
         });
         let buttonContainer = new Container();
         startButton.appendTo(buttonContainer);
+        recordButton.appendTo(buttonContainer);
+        recordButton.set({
+            x:0,
+            y:200
+        })
         this.menuContainer.addChild(buttonContainer);
     }
     
@@ -40,6 +49,7 @@ class StartScope extends BaseScope{
     }
     init(){
         this.menuContainer.x = (this.app.screen.width - this.menuContainer.width)/2
+        this.menuContainer.y = (this.app.screen.height - this.menuContainer.height)/2
     }
     gameLoop(){
         console.log('gamming');

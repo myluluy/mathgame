@@ -1,5 +1,5 @@
 import type { ListenerFn } from 'eventemitter3';
-import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture, Application} from 'pixi.js';
+import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture, Application, type IPointData} from 'pixi.js';
 import gamebutton from '../../assets/gamebutton.png';
 
 /**load assets */
@@ -25,6 +25,10 @@ class Button {
         this.size = options.size||0.08;
         this._build()
     }
+    set(point:IPointData) {
+        this._button.x = point.x;
+        this._button.y = point.y;
+    }
     on:Function = (event:string,fn: ListenerFn)=>{
         this._button.on(event, fn)
     };
@@ -33,22 +37,22 @@ class Button {
         this.parent = container;
     }
 
-    align(align:string='center') {
-        switch (align) {
-            case 'left':
-                this._button.x = 0;
-            break;
-            case 'center':
-                this._button.x =  100;
-            break;
-            case 'right':
-                this._button.x =  200;
-            break;
-            default:
-                this._button.x =  100;
-            break;
-        }
-    }
+    // align(align:string='center') {
+    //     switch (align) {
+    //         case 'left':
+    //             this._button.x = 0;
+    //         break;
+    //         case 'center':
+    //             this._button.x =  100;
+    //         break;
+    //         case 'right':
+    //             this._button.x =  200;
+    //         break;
+    //         default:
+    //             this._button.x =  100;
+    //         break;
+    //     }
+    // }
 
     private _build(){
         const text = new Text(this.text,{
