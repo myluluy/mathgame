@@ -37,7 +37,7 @@ class MathGame {
         if('function' === typeof this.router.routeAction) {
             this.router.routeAction();
         }
-        this.router.currRoute.gameLoop();
+        this.router.currRoute.cycle();
     }
 
 

@@ -21,6 +21,9 @@ class Router {
         }
     }
     routerTo(scopeName:string, state?:any, destory?:Boolean) {
+        if (this.state === 1) {
+            return;
+        }
         this.state = 1;
         let route = this.scopes[scopeName];
         let fromScope = this.currRoute ? this.currRoute : null;

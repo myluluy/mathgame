@@ -1,5 +1,5 @@
 import type { ListenerFn } from 'eventemitter3';
-import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture} from 'pixi.js';
+import {Container,Text,Texture,Loader, Rectangle, Sprite,BaseTexture, Application} from 'pixi.js';
 import gamebutton from '../../assets/gamebutton.png';
 
 /**load assets */
@@ -11,7 +11,10 @@ class Button {
     
     text:string = 'Button'; 
     private _button:Container;
-    constructor(options:any) {
+    readonly size:number;
+    loaded:boolean = false;
+    parent:Container|null = null;
+    constructor( options:any) {
         if(typeof options.text === 'string') {
             this.text = options.text;
         }
@@ -19,17 +22,35 @@ class Button {
         this._button = new Container();
         this._button.buttonMode = true;
         this._button.interactive = true;
-        this._build(options.size||0.08);
+        this.size = options.size||0.08;
+        this._build()
     }
     on:Function = (event:string,fn: ListenerFn)=>{
         this._button.on(event, fn)
     };
     appendTo(container:Container) {
         container.addChild(this._button);
-        
+        this.parent = container;
     }
 
-    private _build(size:number){
+    align(align:string='center') {
+        switch (align) {
+            case 'left':
+                this._button.x = 0;
+            break;
+            case 'center':
+                this._button.x =  100;
+            break;
+            case 'right':
+                this._button.x =  200;
+            break;
+            default:
+                this._button.x =  100;
+            break;
+        }
+    }
+
+    private _build(){
         const text = new Text(this.text,{
             fontSize:420,
             fill:0xffffff,
@@ -39,13 +60,13 @@ class Button {
         const button = new Sprite(texture);
         button.addChild(text);
         this._button.addChild(button);
+        this._button.scale = {x:this.size,y:this.size}
         loader.load((loader,resources) =>{
             let rectangle = new Rectangle(231,439, 2520,1199);
             texture.frame = rectangle;
-            text.x = (this._button.width - text.width) /2;
-            text.y = (this._button.height - text.height)/2 * 0.9;
-            this._button.scale = {x:size,y:size}
-            
+            text.anchor.x = -0.25;
+            text.anchor.y = -0.70;
+            this.loaded = true;
         })
         
     }
