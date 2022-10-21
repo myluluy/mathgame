@@ -1,7 +1,7 @@
 
 import Question from './Question';
 class GameMain {
-    private questions:string[] = [];
+    private questions:any[] = [];
     private rightQuestions:any[] = [];
     private wrongQuestions:any[] = [];
     private missQuestions:any[] = [];
@@ -15,10 +15,22 @@ class GameMain {
     }
 
     createQuestions(){
-        let q = new Question();
-        console.log(q);
-    }
+        let len = 10;
+        for(let i=0; i<len; i++) {
+            let q = new Question();
+            this.questions.push(q);
+        }
 
+    }
+    activeQuestion(){
+        if(this.activeQuestions.length ===0) {
+            let q = this.questions.pop();
+            if(q) {
+                this.activeQuestions.push(q)
+            }
+        }
+        
+    }
     doQuestion(anwser:number){
         
     }
@@ -37,6 +49,9 @@ class GameMain {
 
     getMissQuestions(){
         return this.missQuestions;
+    }
+    getActiveQuestions(){
+        return this.activeQuestions;
     }
 
     private _getNewQuestion(){
