@@ -34,9 +34,16 @@ class GameMain {
     doQuestion(anwser:number){
         
     }
-    doMissQuestion(question:Question) {
+    private _doMissQuestion(question:Question) {
         question.status = 'miss';
         this.missQuestions.push(question);
+    }
+    doMissQuestionByActive(index:number) {
+        let question = this.activeQuestions[index];
+        if(question) {
+            this.activeQuestions.splice(index,1);
+            return this._doMissQuestion(question)
+        }
     }
 
     getRightQuestions(){
@@ -71,6 +78,7 @@ class GameMain {
     continue(){
 
     }
+    
 
 }
 

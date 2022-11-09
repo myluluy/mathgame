@@ -1,6 +1,7 @@
 
 import {Application,utils} from 'pixi.js';
 import Router from '../ts/router';
+
 class MathGame {
     app:Application = new Application() ;
     state:any = {};

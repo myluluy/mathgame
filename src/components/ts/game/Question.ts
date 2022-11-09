@@ -6,14 +6,23 @@ type Formula = {
 
 
 class Question {
-    frames:number = 0; //存活周期，每帧变化
-    speed:number =1 // frames的变化量
+    frames:number = 0; //当前存活的帧数
+    activeTimer:number = 10000 // 存活秒数
+    startTimer:number|undefined; //开始的时间戳
     status:string = 'unAnswer'; //right,wrong,miss
     answer:number|undefined;
     private rightAnswer:number = 0;
     private formula:Formula;
-    constructor(minDigit:number = 1, maxDigit:number = 2, speed:number = 1,operator:string[] = ["+","-"], operatorNum:number = 3){
-        this.speed = speed
+    /**
+     * 
+     * @param minDigit 随机的算式中最小可能的位数
+     * @param maxDigit 随机的算式中最大可能的位数
+     * @param ActiveTimer 当算式在画面中展示时，存活多少毫秒
+     * @param operator 可能随机到的运算符
+     * @param operatorNum 可能随机到的运算则数
+     */
+    constructor(minDigit:number = 1, maxDigit:number = 2, activeTimer:number = 10000,operator:string[] = ["+","-"], operatorNum:number = 3){
+        this.activeTimer = activeTimer
         this.formula = this.randomGenerate(minDigit,maxDigit,operator,operatorNum);
         this.rightAnswer = this.getRightAnswer();
     }
@@ -21,7 +30,6 @@ class Question {
     getRightAnswer(formula?:Formula) {
         return new Function('return ' + this.getFormula(formula) + ';')();
     }
-
     getFormula(formula?:Formula){
         formula = formula || this.formula;
         let str:string = '';

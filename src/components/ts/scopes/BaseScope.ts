@@ -50,7 +50,7 @@ class BaseScope {
     }
     init(){
     }
-    gameLoop(){
+    gameLoop(isFirst?:Boolean){
     }
 
     cycle(){
@@ -73,7 +73,7 @@ class BaseScope {
                 this.status ='inited';
             break;
             case 'inited':
-                this.gameLoop();
+                this.gameLoop(true);
                 this.status = 'running';
             break;
             case 'running':
