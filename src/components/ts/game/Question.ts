@@ -56,13 +56,8 @@ class Question {
     }
 
     private randomGenerate(minDigit:number,maxDigit:number,operatorNum:number){
-        // operatorNum 确定几则运算
-        const nums:number[] = [];
-        const operators:string[] = [];
         const formulas:Formulas = [];
-        // nums.push()
         for (let i=0; i< operatorNum * 2 - 1; i++) {
-            console.log(i,operatorNum);
             let  answer = formulas.length === 0? 0 : this.getRightAnswer(formulas);
             if(i%2 == 0) { //生成数字
                 let num; 
@@ -74,7 +69,7 @@ class Question {
                     num=this.random(Math.pow(10,digit-1), Math.pow(10,digit) -1);
                 }
                 formulas.push(num);
-            } else {
+            } else { //生成运算符
                 if(answer === 0) {
                     formulas.push('+');
                 } else {

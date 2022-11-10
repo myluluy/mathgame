@@ -5,10 +5,13 @@ import GameMain from '../game/GameMain'
 import exportImg from '../tools/exportImg';
 import DrawBoard from '../ui/drawBoard';
 import DrawPen from '../tools/drawPen';
+import TimeClock from '../tools/timeClock';
 class GameScope extends BaseScope{
     private gameMain:GameMain = new GameMain(); 
     private drawBoard:DrawBoard = new DrawBoard();
     private drawPen:DrawPen = new DrawPen(3,0xFF0000);
+    private timeClock!:TimeClock;
+    private currTime!:string;
     constructor(app:Application,router:Router){
         super(app,router);
 
@@ -35,8 +38,14 @@ class GameScope extends BaseScope{
     }
     init(){
         this.drawBoard.appendTo(this.app,this.drawPen);
+        this.timeClock = new TimeClock();
     }
     gameLoop(){
+        let currTime = this.timeClock.getTime();
+        if(this.currTime !== currTime) {
+            console.log(this.timeClock.getTime());
+            this.currTime = currTime;
+        }
         this.gameMain.activeQuestion();
         let question = this.gameMain.getActiveQuestions();
         question.forEach(async (o,i)=>{
