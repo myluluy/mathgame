@@ -52,6 +52,7 @@ export default class DrawPen {
         if(this.status === 1) {
 
             this.graphics.beginFill(0xFF0000,1)
+
             while (this.path.length !=0) {
                 let point:PathPoint = <PathPoint>this.path.shift();
                 if(point.isMoveTo ) {
@@ -72,6 +73,8 @@ export default class DrawPen {
     clear(){
         this.graphics.clear();
         this.path = [];
+        this.lastPoint = {x:0,y:0}
+        this.prevPoint = {x:0,y:0}
     }
 
     bind(container:Container){
