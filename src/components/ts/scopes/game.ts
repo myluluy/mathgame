@@ -3,10 +3,15 @@ import BaseScope from './BaseScope';
 import type Router from '../router';
 import GameMain from '../game/GameMain'
 import exportImg from '../tools/exportImg';
+import DrawBoard from '../ui/drawBoard';
+import DrawPen from '../tools/drawPen';
 class GameScope extends BaseScope{
     private gameMain:GameMain = new GameMain(); 
+    private drawBoard:DrawBoard = new DrawBoard();
+    private drawPen:DrawPen = new DrawPen(3,0xFF0000);
     constructor(app:Application,router:Router){
         super(app,router);
+
         this.scope = {
             name:'game',
             scope: {},
@@ -25,11 +30,11 @@ class GameScope extends BaseScope{
     }
     
     mount(){
-        
         console.log('mounted');
         
     }
     init(){
+        this.drawBoard.appendTo(this.app,this.drawPen);
     }
     gameLoop(){
         this.gameMain.activeQuestion();
@@ -51,6 +56,7 @@ class GameScope extends BaseScope{
                 this.gameMain.doMissQuestionByActive(i);
             }
         })
+        this.drawBoard.pen.render();
 
     }
 }

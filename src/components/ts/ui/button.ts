@@ -10,7 +10,7 @@ loader.add('btn',gamebutton)
 class Button {
     
     text:string = 'Button'; 
-    _button:Container;
+    private readonly _button:Container;
     readonly size:number;
     loaded:boolean = false;
     parent:Container|null = null;

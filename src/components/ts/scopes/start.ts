@@ -3,8 +3,6 @@ import {Container, Application} from 'pixi.js';
 import BaseScope from './BaseScope';
 import type Router from '../router';
 
-import drawPen from '../tools/drawPen'
-import DrawPen from '../tools/drawPen';
 class StartScope extends BaseScope{
     menuContainer:Container;
     constructor(app:Application,router:Router){
@@ -31,7 +29,6 @@ class StartScope extends BaseScope{
         });
         this.addLoad(startButton); //预加载资源
         this.addLoad(recordButton); //预加载资源
-        let pen = new DrawPen(3,0xFF0000);
         startButton.on('pointerup',(e: any)=>{
             this.router.routerTo('game');
         });
@@ -45,7 +42,6 @@ class StartScope extends BaseScope{
         })
         this.menuContainer.addChild(buttonContainer);
 
-        pen.bind(recordButton._button);
     }
     
     mount(){
