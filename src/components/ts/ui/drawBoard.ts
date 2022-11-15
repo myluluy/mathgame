@@ -11,9 +11,6 @@ class DrawBoard {
         
     }
 
-    getBoardContainer(){
-        return this._board;
-    }
 
     appendTo(app:Application, drawPen:DrawPen) {
         app.stage.addChild(this._board);

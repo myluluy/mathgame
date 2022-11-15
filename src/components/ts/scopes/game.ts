@@ -52,7 +52,13 @@ class GameScope extends BaseScope{
             if(o.frames === 0) {
                 o.text = new Text(o.getFormula())
                 o.startTimer = new Date().getTime();
+                o.text.style.dropShadow = true;
+                o.text.style.stroke = 'yellow';
+                o.text.style.fontSize = 50;
+                o.text.anchor.set(0.5);
+                o.text.x = this.app.screen.width/2;
                 this.scope.container.addChild(o.text);
+                
                 
             }
 

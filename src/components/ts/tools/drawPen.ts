@@ -41,7 +41,7 @@ export default class DrawPen {
         this.status = 1;
     }
     draw(point:IPointData){
-        if(Math.abs(this.lastPoint.x - point.x) >=5 || Math.abs(this.lastPoint.y - point.y) >=5) {
+        if(Math.abs(this.lastPoint.x - point.x) >=1 || Math.abs(this.lastPoint.y - point.y) >=1) {
             this.path.push({point:{...point}});
             this.lastPoint = {...point};
         } else {

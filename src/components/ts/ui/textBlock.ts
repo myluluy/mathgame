@@ -7,6 +7,7 @@ class TextBlock {
         this.text = text;
         this._textBlock = new Container();
         this._build();
+        
     }
 
 

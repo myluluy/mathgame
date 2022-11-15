@@ -37,22 +37,7 @@ class Button {
         this.parent = container;
     }
 
-    // align(align:string='center') {
-    //     switch (align) {
-    //         case 'left':
-    //             this._button.x = 0;
-    //         break;
-    //         case 'center':
-    //             this._button.x =  100;
-    //         break;
-    //         case 'right':
-    //             this._button.x =  200;
-    //         break;
-    //         default:
-    //             this._button.x =  100;
-    //         break;
-    //     }
-    // }
+    
 
     private _build(){
         const text = new Text(this.text,{
